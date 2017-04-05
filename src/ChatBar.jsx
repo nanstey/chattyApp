@@ -15,7 +15,7 @@ class ChatBar extends Component {
 
   nameChange(event) {
     let newName = event.target.value;
-    console.log(newName);
+    console.log(this.state.username, 'changed to', newName);
     this.setState({
       username: newName
     });
@@ -24,7 +24,7 @@ class ChatBar extends Component {
 
   handleSubmit(event) {
     if (event.key === 'Enter'){
-      console.log(event.target.value)
+      // console.log(event.target.value)
       let content = event.target.value;
       let msg = {
         username: this.state.username,
