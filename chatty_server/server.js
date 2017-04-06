@@ -17,13 +17,24 @@ const server = express()
 const wss = new SocketServer({ server });
 
 let ConnectedUsers = 0;
+const colors = ['red', 'blue', 'green', 'magenta'];
 
 // Set up a callback that will run when a client connects to the server
 // When a client connects they are assigned a socket, represented by
 // the ws parameter in the callback.
 wss.on('connection', (ws) => {
   console.log('Client connected');
+  setUserColor();
   usersConnected(1);
+
+  function setUserColor(){
+    let index = ConnectedUsers % colors.length;
+    let message = {
+      type: "setUserColor",
+      color: colors[index]
+    };
+    ws.send(JSON.stringify(message))
+  }
 
   function broadcast(msg){
     wss.clients.forEach(function each(client) {

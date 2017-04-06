@@ -22,7 +22,8 @@ class ChatBar extends Component {
       // console.log(this.state.username, 'changed to', newName);
       let msg = {
         type: 'postNotification',
-        content: `${this.state.username} changed their name to ${newName}`
+        oldName: this.state.username,
+        newName: newName
       }
       this.props.postMessage(msg);
     }
@@ -32,9 +33,11 @@ class ChatBar extends Component {
     if (event.key === 'Enter'){
       // console.log(event.target.value)
       let content = event.target.value;
+      let name;
+      this.state.username ? name = this.state.username : name = 'Anonymous';
       let msg = {
         type: 'postMessage',
-        username: this.state.username,
+        username: name,
         content: content
       };
       event.target.value = '';

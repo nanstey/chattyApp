@@ -9,8 +9,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUser: {name:'Bob'},
+      currentUser: {name:''},
       connectedUsers: 0,
+      color: 'black',
       messages: []
     };
 
@@ -31,11 +32,20 @@ class App extends Component {
       let msg = JSON.parse(event.data);
       console.log(msg);
 
-      if (msg.type === "usersConnected"){
-        this.setState({connectedUsers: msg.users })
-      } else {
-        let messages = this.state.messages.concat(msg);
-        this.setState({messages: messages});
+      switch (msg.type){
+        case "setUserColor":
+          this.setState({color: msg.color});
+          break;
+        case "usersConnected":
+          this.setState({connectedUsers: msg.users });
+          break;
+        case "incomingMessage":
+        case "incomingNotification":
+        {
+          let messages = this.state.messages.concat(msg);
+          this.setState({messages: messages});
+          break;
+        }
       }
     }
 
@@ -44,6 +54,7 @@ class App extends Component {
 
   postMessage(msg) {
     console.log(msg);
+    msg.color = this.state.color;
     this.socket.send(JSON.stringify(msg));
   }
 
@@ -54,7 +65,7 @@ class App extends Component {
     return (
       <div>
         <Navbar users={this.state.connectedUsers}/>
-        <MessageList messages={this.state.messages}/>
+        <MessageList messages={this.state.messages} />
         <ChatBar user={this.state.currentUser} postMessage={this.postMessage}/>
       </div>
     );

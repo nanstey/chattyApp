@@ -14,8 +14,14 @@ h1 {
   color: tomato;
 }
 
+img {
+  width: 60%;
+  display: block;
+  margin: 10px;
+}
+
 .chatbar {
-  background: tomato;
+  background: rgba(73,155,234,1);
   border-top: 1px solid black;
   bottom: 0;
   display: flex;
@@ -28,6 +34,7 @@ h1 {
 .chatbar-message,
 .chatbar-username {
   border: 1px solid black;
+  border-radius: 18px;
   display: block;
   height: 40px;
   line-height: 40px;
@@ -55,7 +62,6 @@ h1 {
 
 .message-content,
 .message-username {
-  overflow: hidden;
   margin: 5px;
   padding: 0 10px;
 }
@@ -70,7 +76,7 @@ h1 {
 }
 
 .navbar {
-  background: tomato;
+  background: rgba(73,155,234,1);
   border-bottom: 1px solid black;
   height: 60px;
   left: 0;
@@ -97,3 +103,4 @@ h1 {
   font-size: large;
   margin-top: 20px;
 }
+
