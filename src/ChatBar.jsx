@@ -15,11 +15,17 @@ class ChatBar extends Component {
 
   nameChange(event) {
     let newName = event.target.value;
-    console.log(this.state.username, 'changed to', newName);
-    this.setState({
-      username: newName
-    });
-
+    if (newName !== this.state.username) {
+      this.setState({
+        username: newName
+      });
+      // console.log(this.state.username, 'changed to', newName);
+      let msg = {
+        type: 'postNotification',
+        content: `${this.state.username} changed their name to ${newName}`
+      }
+      this.props.postMessage(msg);
+    }
   }
 
   handleSubmit(event) {
@@ -27,11 +33,12 @@ class ChatBar extends Component {
       // console.log(event.target.value)
       let content = event.target.value;
       let msg = {
+        type: 'postMessage',
         username: this.state.username,
         content: content
       };
-      this.props.postMessage(msg);
       event.target.value = '';
+      this.props.postMessage(msg);
     }
   }
 
