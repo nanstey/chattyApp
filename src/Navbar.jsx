@@ -10,7 +10,7 @@ class Navbar extends Component {
     console.log('Navbar.jsx');
     return (
       <nav className="navbar">
-        <a href="/" className="navbar-brand">ChattyApp</a>
+        <div href="/" className="navbar-brand">ChattyApp</div>
         <span className="usersOnline">{this.props.users} user(s) online</span>
       </nav>
     );

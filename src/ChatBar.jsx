@@ -19,7 +19,6 @@ class ChatBar extends Component {
       this.setState({
         username: newName
       });
-      // console.log(this.state.username, 'changed to', newName);
       let msg = {
         type: 'postNotification',
         oldName: this.state.username,
@@ -31,13 +30,10 @@ class ChatBar extends Component {
 
   handleSubmit(event) {
     if (event.key === 'Enter'){
-      // console.log(event.target.value)
       let content = event.target.value;
-      let name;
-      this.state.username ? name = this.state.username : name = 'Anonymous';
       let msg = {
         type: 'postMessage',
-        username: name,
+        username: this.state.username,
         content: content
       };
       event.target.value = '';
@@ -49,7 +45,7 @@ class ChatBar extends Component {
     console.log('ChatBar.jsx');
     return (
       <footer className="chatbar">
-        <input className="chatbar-username" placeholder="Your Name (Optional)" defaultValue={this.state.username} onBlur={this.nameChange} />
+        <input className="chatbar-username" placeholder="Your Name (Optional)" onBlur={this.nameChange} />
         <input className="chatbar-message" placeholder="Type a message and hit ENTER" onKeyPress={this.handleSubmit}/>
       </footer>
     );

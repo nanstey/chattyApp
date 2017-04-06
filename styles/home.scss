@@ -1,11 +1,12 @@
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700");
+@import url("https://fonts.googleapis.com/css?family=Lobster");
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 @import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css");
 
 body {
   background: white;
   color: black;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 14px;
   margin: 70px 0;
 }
@@ -87,15 +88,18 @@ img {
 }
 
 .navbar-brand {
+  font-family: 'Lobster', cursive;
   color: inherit;
   display: block;
   float: left;
   font-weight: 700;
-  font-size: 28px;
+  font-size: 66px;
   height: 60px;
-  line-height: 60px;
+  line-height: 62px;
   padding: 0 10px;
   text-decoration: none;
+  text-shadow: 2px 2px 4px #4bff00;
+  user-select: none;
 }
 
 .usersOnline {
