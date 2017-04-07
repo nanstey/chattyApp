@@ -11,7 +11,6 @@ class App extends Component {
     this.state = {
       currentUser: {name:'Anonymous'},
       connectedUsers: 0,
-      color: 'black',
       messages: []
     };
 
@@ -21,7 +20,7 @@ class App extends Component {
   componentDidMount() {
     console.log("componentDidMount <App />");
 
-    var socket = new WebSocket('ws://localhost:3002');
+    var socket = new WebSocket('ws://localhost:4002');
 
     socket.onopen = (event) => {
       console.log('Connected to server');
