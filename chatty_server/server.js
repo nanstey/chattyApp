@@ -16,24 +16,44 @@ const server = express()
 // Create the WebSockets server
 const wss = new SocketServer({ server });
 
-let ConnectedUsers = 0;
-const colors = ['red', 'blue', 'green', 'magenta', 'rebeccapurple', 'cornflowerblue', 'grey', 'sienna', 'crimson', 'teal'];
+let ColorCounter = 0;
+let Sockets = {};
+const colors = ['red', 'blue', 'green', 'magenta', 'rebeccapurple', 'cornflowerblue', 'grey', 'sienna', 'darkblue', 'teal'];
 
 // Set up a callback that will run when a client connects to the server
 // When a client connects they are assigned a socket, represented by
 // the ws parameter in the callback.
 wss.on('connection', (ws) => {
   console.log('Client connected');
-  setUserColor();
-  usersConnected(1);
+  let color = setUserColor();
+
+  ws.id = uuidV1();
+  Sockets[ws.id] = {
+    id: ws.id,
+    name: 'Anonymous',
+    color: color
+  };
+
+  console.log(Sockets);
+  updateUserList();
+
+  function updateUserList() {
+    let message = {
+      type: "updateUserList",
+      users: Sockets
+    }
+    broadcast(message);
+  }
 
   function setUserColor(){
-    let index = ConnectedUsers % colors.length;
+    let index = ColorCounter % colors.length;
+    ColorCounter++;
     let message = {
       type: "setUserColor",
       color: colors[index]
     };
-    ws.send(JSON.stringify(message))
+    ws.send(JSON.stringify(message));
+    return message.color;
   }
 
   function broadcast(msg){
@@ -44,20 +64,14 @@ wss.on('connection', (ws) => {
     });
   }
 
-  function usersConnected(num) {
-    ConnectedUsers += num;
-    let message = {
-      type: "usersConnected",
-      users: ConnectedUsers
-    }
-    broadcast(message);
-  }
-
   ws.on('message', function incoming(data) {
     let message = JSON.parse(data);
     // console.log(message);
     switch (message.type){
       case "postNotification":
+        console.log(message);
+        Sockets[ws.id].name = message.newName;
+        updateUserList();
         message.type = "incomingNotification";
         break;
       case "postMessage":
@@ -72,7 +86,8 @@ wss.on('connection', (ws) => {
   // Set up a callback for when a client closes the socket. This usually means they closed their browser.
   ws.on('close', () => {
    console.log('Client disconnected');
-   usersConnected(-1);
+   delete Sockets[ws.id]
+   updateUserList();
   });
 
 });

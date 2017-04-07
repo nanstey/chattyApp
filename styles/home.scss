@@ -17,10 +17,104 @@ h1 {
 }
 
 img {
-  width: 60%;
-  max-width: 300px;
+  width: 100%;
+  max-width: 460px;
   display: block;
-  margin: 10px;
+  margin: 10px 0;
+}
+
+.navbar {
+  background: rgba(73,155,234,1);
+  border-bottom: 1px solid black;
+  height: 60px;
+  left: 0;
+  padding: 0 10px;
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
+.navbar-brand {
+  font-family: 'Lobster', cursive;
+  color: inherit;
+  display: block;
+  float: left;
+  font-weight: 700;
+  font-size: 66px;
+  height: 60px;
+  line-height: 62px;
+  padding: 0 10px;
+  text-decoration: none;
+  text-shadow: 2px 2px 4px #4bff00;
+  user-select: none;
+}
+
+.container{
+  padding-top: 15px;
+}
+
+.messages {
+  width: 100%;
+  display: inline-block;
+}
+
+.message {
+  padding: 5px;
+}
+
+.message:hover {
+  background-color: #F9F9F9
+}
+
+.message.system {
+  font-style: italic;
+  padding: 5px 20px;
+}
+
+.message-content,
+.message-username {
+  margin: 5px;
+  padding: 0 10px;
+  display: block;
+}
+
+.message-content {
+  padding-left: 20px;
+}
+
+.message-username {
+  font-weight: 700;
+}
+
+.usersOnline {
+  float: right;
+  width: 30%;
+  left: 65%;
+  z-index: 1;
+  font-size: inherit;
+  position: fixed;
+  display: inline;
+  border: 1px solid;
+  border-color: #499bea;
+  border-radius: 20px;
+  padding: 12px;
+  background-color: aliceblue;
+}
+
+.user {
+  display: block;
+  line-height: 23px;
+}
+
+.user-color {
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
+  padding-bottom: 1px;
+}
+
+.user-name {
+  line-height: 2px;
 }
 
 .chatbar {
@@ -52,65 +146,3 @@ img {
 .chatbar-username {
   flex: 2;
 }
-
-.message {
-  display: flex;
-  padding: 5px;
-}
-
-.message:hover {
-  background-color: #F9F9F9
-}
-
-.message.system {
-  font-style: italic;
-  padding: 5px 20px;
-}
-
-.message-content,
-.message-username {
-  margin: 5px;
-  padding: 0 10px;
-}
-
-.message-content {
-  flex: 8;
-}
-
-.message-username {
-  flex: 2;
-  font-weight: 700;
-}
-
-.navbar {
-  background: rgba(73,155,234,1);
-  border-bottom: 1px solid black;
-  height: 60px;
-  left: 0;
-  padding: 0 10px;
-  position: fixed;
-  right: 0;
-  top: 0;
-}
-
-.navbar-brand {
-  font-family: 'Lobster', cursive;
-  color: inherit;
-  display: block;
-  float: left;
-  font-weight: 700;
-  font-size: 66px;
-  height: 60px;
-  line-height: 62px;
-  padding: 0 10px;
-  text-decoration: none;
-  text-shadow: 2px 2px 4px #4bff00;
-  user-select: none;
-}
-
-.usersOnline {
-  float: right;
-  font-size: large;
-  margin-top: 20px;
-}
-
