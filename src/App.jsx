@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import MessageList from './MessageList.jsx';
 import ChatBar from './ChatBar.jsx';
-import Navbar from './Navbar.jsx'
+import Navbar from './Navbar.jsx';
+import UsersOnline from './UsersOnline.jsx';
 
 
 class App extends Component {
@@ -11,6 +12,7 @@ class App extends Component {
     this.state = {
       currentUser: {name:'Anonymous'},
       connectedUsers: 0,
+      userList: [],
       messages: []
     };
 
@@ -32,6 +34,13 @@ class App extends Component {
       console.log(msg);
 
       switch (msg.type){
+        case "updateUserList":
+          let userArr = [];
+          for (let key in msg.users){
+            userArr.push(msg.users[key]);
+          }
+          this.setState({userList: userArr})
+          break;
         case "setUserColor":
           this.setState({color: msg.color});
           break;
@@ -63,8 +72,11 @@ class App extends Component {
     console.log('App.jsx');
     return (
       <div>
-        <Navbar users={this.state.connectedUsers}/>
-        <MessageList messages={this.state.messages} />
+        <Navbar />
+        <div className="container">
+          <MessageList messages={this.state.messages} />
+          <UsersOnline userList={this.state.userList} />
+        </div>
         <ChatBar user={this.state.currentUser} postMessage={this.postMessage}/>
       </div>
     );
