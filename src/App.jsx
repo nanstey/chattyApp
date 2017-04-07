@@ -11,7 +11,6 @@ class App extends Component {
     super(props);
     this.state = {
       currentUser: {name:'Anonymous'},
-      connectedUsers: 0,
       userList: [],
       messages: []
     };
@@ -44,10 +43,8 @@ class App extends Component {
         case "setUserColor":
           this.setState({color: msg.color});
           break;
-        case "usersConnected":
-          this.setState({connectedUsers: msg.users });
-          break;
         case "incomingMessage":
+          let lastPostUser
         case "incomingNotification":
         {
           let messages = this.state.messages.concat(msg);
