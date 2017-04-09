@@ -13,16 +13,17 @@ class UsersOnline extends Component {
 
   componentDidMount(){
     let $UsersOnline = $('.usersOnline');
+    let $UserList = $('.userList')
     $UsersOnline.on('click', () => {
       if (this.state.position === 'open'){
-        $UsersOnline.animate({top: "6px", paddingBottom: "0px"}, 200);
-        $('.userList').slideUp(400);
+        $UsersOnline.animate({top: "6px", paddingBottom: "0px"}, 300);
         $UsersOnline.attr('title', 'Show users');
+        $UserList.slideUp(400);
         this.setState({position: 'closed'});
       } else {
-        $UsersOnline.animate({top: "85px", paddingBottom: "12px"}, 200);
-        $('.userList').slideDown(400);
+        $UsersOnline.animate({top: "85px", paddingBottom: "12px"}, 300);
         $UsersOnline.attr('title', 'Hide users');
+        $UserList.slideDown(400);
         this.setState({position: 'open'});
       }
       console.log(this.state.position);
