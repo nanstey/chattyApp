@@ -10,13 +10,25 @@ class MessageList extends Component {
 
   render() {
     console.log('MessageList.jsx');
+
+    let lastPostUser = '';
+    let lastMsgType = '';
+    let printName = true;
+    let Messages = [];
+    for (let i = 0; i < this.props.messages.length; i++){
+      let message = this.props.messages[i];
+      printName = (message.user_id !== lastPostUser || lastMsgType === "incomingNotification");
+
+      Messages.push(
+        <Message key={message.id} msg={message} color={this.props.color} printName={printName} />
+      )
+      lastPostUser = message.user_id;
+      lastMsgType = message.type;
+    }
+
     return (
       <main className="messages">
-
-        {this.props.messages.map( (message) => (
-          <Message key={message.id} msg={message} color={this.props.color}/>
-        ))}
-
+        {Messages}
       </main>
     );
   }

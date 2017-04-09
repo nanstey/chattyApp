@@ -11,11 +11,9 @@ class App extends Component {
     super(props);
     this.state = {
       currentUser: {name:'Anonymous'},
-      connectedUsers: 0,
       userList: [],
       messages: []
     };
-
     this.postMessage = this.postMessage.bind(this);
   }
 
@@ -41,22 +39,15 @@ class App extends Component {
           }
           this.setState({userList: userArr})
           break;
-        case "setUserColor":
-          this.setState({color: msg.color});
-          break;
-        case "usersConnected":
-          this.setState({connectedUsers: msg.users });
+        case "setUserConfig":
+          this.setState({currentUser:{name: msg.name, id: msg.id}, color: msg.color});
           break;
         case "incomingMessage":
         case "incomingNotification":
-        {
-          let messages = this.state.messages.concat(msg);
-          this.setState({messages: messages});
+          this.setState({messages: this.state.messages.concat(msg)});
           break;
-        }
       }
     }
-
     this.socket = socket;
   }
 
@@ -66,15 +57,13 @@ class App extends Component {
     this.socket.send(JSON.stringify(msg));
   }
 
-
-
   render() {
     console.log('App.jsx');
     return (
       <div>
         <Navbar />
         <div className="container">
-          <MessageList messages={this.state.messages} />
+          <MessageList messages={this.state.messages}/>
           <UsersOnline userList={this.state.userList} />
         </div>
         <ChatBar user={this.state.currentUser} postMessage={this.postMessage}/>
