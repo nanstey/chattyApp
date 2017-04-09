@@ -3,6 +3,7 @@ const uuidV1 = require('uuid/v1');
 const express = require('express');
 const WebSocket = require('ws');
 const SocketServer = WebSocket.Server;
+const moment = require('moment');
 
 // Set the port to 4001
 const PORT = 4002;
@@ -70,17 +71,22 @@ wss.on('connection', (ws) => {
     // console.log(message);
     switch (message.type){
       case "postNotification":
-        console.log(message);
         Sockets[ws.id].name = message.newName;
         updateUserList();
         message.type = "incomingNotification";
         break;
       case "postMessage":
+        let timestamp = moment();
+        message.timestamp = {
+          day: timestamp.format('MMM Do'),
+          time: timestamp.format('h:mm a')
+        };
         message.type = "incomingMessage";
         break;
     }
     message.id = uuidV1();
     message.user_id = ws.id;
+    console.log(message);
     broadcast(message);
     // console.log(message.id, 'User', message.username, 'said', message.content);
   });

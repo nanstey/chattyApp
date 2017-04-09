@@ -47,6 +47,7 @@ img {
   text-decoration: none;
   text-shadow: 2px 2px 4px #4bff00;
   user-select: none;
+  cursor: default;
 }
 
 .container{
@@ -72,10 +73,20 @@ img {
 }
 
 .message-content,
-.message-username {
+.message-username,
+.message-timestamp {
   margin: 5px;
   padding: 0 10px;
   display: block;
+}
+
+.message-timestamp {
+  float: left;
+  color: darkgray;
+}
+
+.message-inner {
+  margin-left: 20%;
 }
 
 .message-content {
