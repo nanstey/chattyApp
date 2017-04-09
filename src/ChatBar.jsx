@@ -48,7 +48,7 @@ class ChatBar extends Component {
     console.log('ChatBar.jsx');
     return (
       <footer className="chatbar">
-        <input className="chatbar-username" placeholder="Your Name (Optional)" onBlur={this.nameChange} />
+        <input className="chatbar-username" maxLength="30" placeholder="Your Name (Optional)" onBlur={this.nameChange} />
         <input className="chatbar-message" placeholder="Type a message and hit ENTER" onKeyPress={this.handleSubmit}/>
       </footer>
     );
