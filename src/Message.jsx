@@ -19,13 +19,18 @@ class Message extends Component {
     if (this.props.msg.type === 'incomingMessage'){
       newMessage = (
         <div className="message">
-          { this.props.printName &&
-            <span className="message-username" style={style}>{this.props.msg.username}</span>
-          }
-          <div className="message-content">
-            {reactStringReplace(this.props.msg.content, URL, (match, i) => (
-              <img key={i} src={match} />
-            ))}
+          <div className="message-timestamp">
+            <span className="message-time" title={this.props.msg.timestamp.day}>{this.props.msg.timestamp.time}</span>
+          </div>
+          <div className="message-inner">
+            { this.props.printName &&
+              <span className="message-username" style={style}>{this.props.msg.username}</span>
+            }
+            <div className="message-content">
+              {reactStringReplace(this.props.msg.content, URL, (match, i) => (
+                <img key={i} src={match} />
+              ))}
+            </div>
           </div>
         </div>
       )

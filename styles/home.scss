@@ -73,10 +73,20 @@ img {
 }
 
 .message-content,
-.message-username {
+.message-username,
+.message-timestamp {
   margin: 5px;
   padding: 0 10px;
   display: block;
+}
+
+.message-timestamp {
+  float: left;
+  color: darkgray;
+}
+
+.message-inner {
+  margin-left: 20%;
 }
 
 .message-content {
