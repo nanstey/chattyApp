@@ -17,10 +17,12 @@ class UsersOnline extends Component {
       if (this.state.position === 'open'){
         $UsersOnline.animate({top: "6px", paddingBottom: "0px"}, 200);
         $('.userList').slideUp(400);
+        $UsersOnline.attr('title', 'Show users');
         this.setState({position: 'closed'});
       } else {
         $UsersOnline.animate({top: "85px", paddingBottom: "12px"}, 200);
         $('.userList').slideDown(400);
+        $UsersOnline.attr('title', 'Hide users');
         this.setState({position: 'open'});
       }
       console.log(this.state.position);
@@ -30,7 +32,7 @@ class UsersOnline extends Component {
   render() {
     console.log('UsersOnline.jsx');
     return (
-      <aside className="usersOnline">
+      <aside className="usersOnline" title="Show users">
         <span className="numUsersOnline">{this.props.userList.length} user(s) online</span>
         <br/><br/>
         <div className="userList">
