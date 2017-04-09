@@ -4,7 +4,6 @@ import ChatBar from './ChatBar.jsx';
 import Navbar from './Navbar.jsx';
 import UsersOnline from './UsersOnline.jsx';
 
-
 class App extends Component {
 
   constructor(props) {
