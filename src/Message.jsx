@@ -19,7 +19,9 @@ class Message extends Component {
     if (this.props.msg.type === 'incomingMessage'){
       newMessage = (
         <div className="message">
-          <span className="message-username" style={style}>{this.props.msg.username}</span>
+          { this.props.printName &&
+            <span className="message-username" style={style}>{this.props.msg.username}</span>
+          }
           <div className="message-content">
             {reactStringReplace(this.props.msg.content, URL, (match, i) => (
               <img key={i} src={match} />

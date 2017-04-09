@@ -25,17 +25,28 @@ const colors = ['red', 'blue', 'green', 'magenta', 'rebeccapurple', 'cornflowerb
 // the ws parameter in the callback.
 wss.on('connection', (ws) => {
   console.log('Client connected');
-  let color = setUserColor();
-
-  ws.id = uuidV1();
-  Sockets[ws.id] = {
-    id: ws.id,
-    name: 'Anonymous',
-    color: color
-  };
-
-  console.log(Sockets);
+  setUserConfig();
   updateUserList();
+  console.log(Sockets);
+
+  function setUserConfig(){
+    // User color
+    let index = ColorCounter % colors.length;
+    let color = colors[index];
+    ColorCounter++;
+
+    // User/WS id
+    ws.id = uuidV1();
+    let connectionInfo = {
+      id: ws.id,
+      name: 'Anonymous',
+      color: color
+    };
+    Sockets[ws.id] = connectionInfo;
+    // Set message header
+    connectionInfo.type = "setUserConfig";
+    ws.send(JSON.stringify(connectionInfo));
+  }
 
   function updateUserList() {
     let message = {
@@ -45,16 +56,6 @@ wss.on('connection', (ws) => {
     broadcast(message);
   }
 
-  function setUserColor(){
-    let index = ColorCounter % colors.length;
-    ColorCounter++;
-    let message = {
-      type: "setUserColor",
-      color: colors[index]
-    };
-    ws.send(JSON.stringify(message));
-    return message.color;
-  }
 
   function broadcast(msg){
     wss.clients.forEach(function each(client) {
@@ -79,6 +80,7 @@ wss.on('connection', (ws) => {
         break;
     }
     message.id = uuidV1();
+    message.user_id = ws.id;
     broadcast(message);
     // console.log(message.id, 'User', message.username, 'said', message.content);
   });
