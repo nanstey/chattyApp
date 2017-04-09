@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import $ from 'jquery';
 
 class ChatBar extends Component {
 
@@ -34,13 +35,16 @@ class ChatBar extends Component {
   handleSubmit(event) {
     if (event.key === 'Enter'){
       let content = event.target.value;
-      let msg = {
-        type: 'postMessage',
-        username: this.state.username,
-        content: content
-      };
-      event.target.value = '';
-      this.props.postMessage(msg);
+      if (content.trim('\s') !== ""){
+        let msg = {
+          type: 'postMessage',
+          username: this.state.username,
+          content: content
+        };
+        event.target.value = '';
+        this.props.postMessage(msg);
+        $("html, body").animate({ scrollTop: $(document).height() }, 1000);
+      }
     }
   }
 
